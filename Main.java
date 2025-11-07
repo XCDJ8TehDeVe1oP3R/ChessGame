@@ -1,18 +1,16 @@
 import javax.swing.JFrame;
 
 public class Main {
-    public static void main(String[] args){
-        JFrame window = new JFrame("Chess Game");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Chess Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
 
-        GamePanel game = new GamePanel();
-        window.add(game);
-        window.pack();
-
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-
-        game.launchChess();
+        GamePanel gamePanel = new GamePanel();
+        frame.add(gamePanel);
+        frame.pack();
+        
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }
