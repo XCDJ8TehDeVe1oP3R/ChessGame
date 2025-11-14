@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -84,6 +85,15 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    private void changePlayer() {
+        if(currentColor == WHITE) {
+            currentColor = BLACK;
+        } else {
+            currentColor = WHITE;
+        }
+        activeP = null;
+    }
+
     @Override
     public void run() {
         double drawInterval = 1000000000 / FPS;
@@ -123,6 +133,8 @@ public class GamePanel extends JPanel implements Runnable {
             if(validSquare){
                 copyPieces(simPieces, pieces);
                 activeP.updatePosition();
+
+                changePlayer();
             }else{
                 copyPieces(pieces, simPieces);
                 activeP.resetPosition();
@@ -155,9 +167,12 @@ public class GamePanel extends JPanel implements Runnable {
                         Board.SQR_SIZE, Board.SQR_SIZE);
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-                activeP.draw(g2);
+                
             }
+            activeP.draw(g2);
         }
+
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
     }
 
     private void simulate() {
@@ -179,6 +194,4 @@ public class GamePanel extends JPanel implements Runnable {
             validSquare = true;
         }
     }
-
-
 }

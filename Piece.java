@@ -10,6 +10,7 @@ public class Piece {
     public int col, row, preCol, preRow;
     public int color;
     public Piece hittingP;
+    public boolean moved;
 
     public Piece(int color, int col, int row) {
         this.color = color;
@@ -27,7 +28,7 @@ public class Piece {
         try {
             img = ImageIO.read(getClass().getResourceAsStream(imgPath + ".png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Could'nt find image");
         }
 
         return img;
@@ -54,6 +55,7 @@ public class Piece {
         y = getY(row);
         preCol = getCol(x);
         preRow = getRow(y);
+        moved = true;
     }
 
     public boolean canMove(int targetCol, int targetRow) {
@@ -187,6 +189,7 @@ public class Piece {
 
         return false;
     }
+
 
     public int getIndex() {
         for(int i = 0; i < GamePanel.pieces.size(); i++) {
